@@ -47,7 +47,10 @@ main .card{
     margin: 10px 20px;
 
     position: relative;
-
+    /* backface-visibility: hidden; */
+    transform-style: preserve-3d;
+    transition: all .5s;
+    
 }
 main .card img{
     height: 100px;
@@ -56,13 +59,15 @@ main .card img{
     position: absolute;
     z-index: 0;
 
-    backface-visibility: hidden;
-    transition: all .6s;
-    transform-style: preserve-3d;
-
 }
 .back-face{
     transform: rotateY(180deg);
+}
+.card:active .back-face{
+    transform: rotateY(0);
+}
+.card:active .front-face{
+    transform: rotateY(-180deg);
 }
 main .front-card img{
     width: 117px;

@@ -28,7 +28,6 @@ function comparator(){
 }
 
 function cardsToGaming(){
-    console.log("entrei naquela função");
 
     for(let i = 0; i < cardsNumber/2; i++){
 
@@ -44,7 +43,6 @@ function cardsToGaming(){
 }
 
 function comparatorAllCards(){
-    console.log("DEU CERTO")
     return Math.random() -0.3;
 }
 
@@ -53,14 +51,44 @@ function addCardsGame(){
     let addNumberCards = document.querySelector(".cards-section");
     
     for( let i = 0; i < arrayIncludeCards.length; i++){
-        console.log("entrei aqui ó")
+
         addNumberCards.innerHTML += `
     
-            <div class="card">
-                <img class="front-face" src="images/front.png" alt="front-card">
-                <img class="back-face" src="images/${arrayIncludeCards[i]}.gif" alt="card">
+            <div class="card" onclick="rotateCard(this)" id="${arrayIncludeCards[i]}">
+                <img src="images/front.png" alt="front-card">
+                <img src="images/${arrayIncludeCards[i]}.gif" alt="card">
             </div>
     
         `;
+    }
+}
+
+let arrayCardsSelected = [];
+function rotateCard(card){
+
+    
+    if(card !== null){
+
+        card.classList.add("back-face");
+        
+        if(arrayCardsSelected.length < 2){
+
+            arrayCardsSelected.push(card.id);
+            
+            if(arrayCardsSelected.length == 2){
+                compareCards(cardTurned);
+            }
+        } 
+    }
+
+}
+function compareCards(){
+    if(arrayCardsSelected[0] == arrayCardsSelected[1]){
+        
+        console.log(arrayCardsSelected);
+
+    } else {
+        document.getElementById(`${arrayCardsSelected[0]}`).style.transform = "rotateY(180deg)";
+        arrayCardsSelected = [];
     }
 }
