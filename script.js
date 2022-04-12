@@ -53,13 +53,17 @@ function addCardsGame(){
     for( let i = 0; i < arrayIncludeCards.length; i++){
 
         addNumberCards.innerHTML += `
-    
+        
+        <div class="">
+            
             <div class="card" onclick="rotateCard(this)" id="${arrayIncludeCards[i]}">
-                <img src="images/front.png" alt="front-card">
                 <img src="images/${arrayIncludeCards[i]}.gif" alt="card">
-            </div>
-    
+            </div>        
+        </div>
         `;
+        // <div class="card" onclick="rotateCard(this)"">
+        //         <img src="images/front.png" alt="front-card">
+        //     </div>
     }
 }
 
@@ -76,7 +80,7 @@ function rotateCard(card){
             arrayCardsSelected.push(card.id);
             
             if(arrayCardsSelected.length == 2){
-                compareCards(cardTurned);
+                compareCards();
             }
         } 
     }
@@ -84,11 +88,39 @@ function rotateCard(card){
 }
 function compareCards(){
     if(arrayCardsSelected[0] == arrayCardsSelected[1]){
+
+        
+    } else if(arrayCardsSelected[0] !== arrayCardsSelected[1]){
         
         console.log(arrayCardsSelected);
-
-    } else {
-        document.getElementById(`${arrayCardsSelected[0]}`).style.transform = "rotateY(180deg)";
-        arrayCardsSelected = [];
+        let cardRemove1 = document.getElementById(`${arrayCardsSelected[0]}`);
+        
+        if(cardRemove1 != null){
+            
+            console.log("entrei no if");
+            
+            cardRemove1.classList.remove("back-face");
+            setTimeout(removeCard, 500);
+        }
+        
+        if(cardRemove1 == null){
+            
+            console.log("entrei no else");
+            setTimeout(refreshArrayCardsCompared, 1000);
+            
+        }    
     }
+}
+function removeCard(){
+    let cardRemove2 = document.getElementById(`${arrayCardsSelected[1]}`);
+    if(cardRemove2 != null){
+            
+        console.log("entrei no if");
+
+        cardRemove2.classList.remove("back-face");
+
+    }
+}
+function refreshArrayCardsCompared(){
+    arrayCardsSelected = [];
 }
